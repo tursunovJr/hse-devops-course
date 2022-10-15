@@ -1,2 +1,2 @@
-# hse-devops-task0
-hse devops course task0
+# hse-devops-course
+hse devops course course
