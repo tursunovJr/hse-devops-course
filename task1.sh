@@ -16,4 +16,5 @@ esac
 shift
 done
 
-cat dataset.csv | awk -v column="$column_links" -F ';' 'NR>1 {print $column}' | parallel -j $workers wget -P ./$output_folder -p -q {} 
+
+cat ./dataset_task1.csv | awk -v column="$column_links" -F ';' 'NR>1 {print $column}' | parallel -j $workers wget -P ./$output_folder -p -q {} 
