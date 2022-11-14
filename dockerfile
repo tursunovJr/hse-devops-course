@@ -13,15 +13,15 @@ RUN apt-get install -y git
 RUN touch /README.md
 
 #copy local files to docker
-RUN mkdir /build
-COPY ./task-docker /build
+RUN mkdir /task-docker
+COPY ./task-docker /task-docker
 
 #create executable file
 RUN printf '#/bin/bash \necho Hello world' > /bin/print_hello.sh
 RUN chmod +x /bin/print_hello.sh
 
 #building cmake project
-RUN cd build && cmake ./CMakeLists.txt && make
+RUN cd task-docker/cmake-with-flask && cmake ./CMakeLists.txt && make
 
 #create group and user
 RUN groupadd -r devops2022 && useradd -r -g devops2022 devops2022user
@@ -30,4 +30,4 @@ RUN groupadd -r devops2022 && useradd -r -g devops2022 devops2022user
 USER devops2022user
 
 #flask app
-ENTRYPOINT ["python3", "./build/app.py", "--port=8898"]
+ENTRYPOINT ["python3", "./task-docker/cmake-with-flask/app.py", "--port=8898"]
