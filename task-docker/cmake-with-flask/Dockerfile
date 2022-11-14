@@ -19,8 +19,8 @@ RUN mkdir /task-docker
 COPY ./ /bin
 
 #create executable file
-RUN printf '#/bin/bash \necho Hello world' > /bin/print_hello.sh
-RUN chmod +x /bin/print_hello.sh
+RUN printf '#!/bin/bash \necho Hello world' > /bin/print_hello
+RUN chmod +x /bin/print_hello
 
 #building cmake project
 RUN cmake ./CMakeLists.txt && make
