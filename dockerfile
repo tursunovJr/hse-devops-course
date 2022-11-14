@@ -14,7 +14,7 @@ RUN touch /README.md
 
 #copy local files to docker
 RUN mkdir /build
-COPY ./cmake-with-flask /build
+COPY ./task-docker /build
 
 #create executable file
 RUN printf '#/bin/bash \necho Hello world' > /bin/print_hello.sh
