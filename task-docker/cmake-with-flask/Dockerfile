@@ -32,5 +32,5 @@ RUN groupadd -r devops2022 && useradd -r -g devops2022 devops2022user
 USER devops2022user
 
 #flask app
-ENTRYPOINT ["python3", "./app.py", "--port=8898"]
 EXPOSE 8898
+ENTRYPOINT ["python3", "./app.py", "--port=8898"]
