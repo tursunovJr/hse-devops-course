@@ -33,3 +33,4 @@ USER devops2022user
 
 #flask app
 ENTRYPOINT ["python3", "./app.py", "--port=8898"]
+EXPOSE 8898
