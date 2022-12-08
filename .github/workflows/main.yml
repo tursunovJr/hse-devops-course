@@ -1,0 +1,46 @@
+name: Googletesting
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: task-ci
+
+    - name: Clone googletest
+      uses: actions/checkout@v2
+      with:
+        repository: google/googletest
+        path: task-ci/3rdparty
+        ref: main
+
+    - name: Build
+      run: |
+        cd $GITHUB_WORKSPACE/task-ci
+        mkdir build
+        cmake -S . -B build
+        cmake --build build
+        sudo chmod u+x bin/*
+        cd build
+        sudo make install
+
+    - name: Test
+      uses: akhtyamovpavel/ActionGtestReport@v0.0.9
+      with: 
+        exec-path: bin/CTestExe
+        report-path: report.xml
+        working-directory: task-ci
+
+    - name: UploadArtifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Distributive
+        path: /usr/local/exe
